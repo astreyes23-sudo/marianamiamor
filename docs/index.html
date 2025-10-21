@@ -28,13 +28,13 @@
       max-height: 90vh;
       overflow-y: auto;
       text-align: center;
-      font-size: 10px;
+      font-size: 13px;
       line-height: 1.8;
       padding: 10px;
     }
 
     a {
-      color: #7ec8e3; /* azul clarito */
+      color: #7ec8e3;
       text-decoration: underline;
       cursor: pointer;
     }
@@ -44,7 +44,7 @@
       border: none;
       border-bottom: 1px solid white;
       color: white;
-      font-size: 10px;
+      font-size: 13px;
       font-family: 'Press Start 2P', monospace;
       width: 100px;
       margin-top: 10px;
@@ -53,11 +53,11 @@
 
     @media (min-width: 768px) {
       #contenido {
-        font-size: 14px;
+        font-size: 16px;
       }
 
       input {
-        font-size: 14px;
+        font-size: 16px;
       }
     }
   </style>
@@ -143,8 +143,8 @@
         if (i <= text.length) {
           p.innerHTML = text.substring(0, i);
           i++;
-          setTimeout(escribir, 20);
-          contenido.scrollTop = contenido.scrollHeight; // auto-scroll
+          setTimeout(escribir, 30); // velocidad más suave
+          contenido.scrollTop = contenido.scrollHeight;
         } else {
           if (callback) callback();
         }
@@ -173,7 +173,7 @@
               }
             });
           } else {
-            mostrarIntro(index + 1);
+            setTimeout(() => mostrarIntro(index + 1), 1500); // más tiempo entre intro frases
           }
         });
       }
@@ -182,7 +182,7 @@
     function mostrarFrases(index = 0) {
       if (index < frases.length) {
         typeWriter(frases[index], () => {
-          setTimeout(() => mostrarFrases(index + 1), 300);
+          setTimeout(() => mostrarFrases(index + 1), 1500); // más tiempo entre frases
         });
       }
     }
