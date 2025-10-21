@@ -1,59 +1,75 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>3 meses con el amor de mi vida 💘</title>
+  <meta charset="UTF-8">
+  <title>3 meses contigo 💘</title>
   <style>
-    @font-face {
-      font-family: 'Press Start 2P';
-      src: url('fonts/PressStart2P.ttf') format('truetype');
-    }
-
     body {
-      background-color: #000;
-      color: #0f0; /* verde estilo hacker */
-      font-family: 'Press Start 2P', monospace;
-      font-size: 14px;
-      white-space: pre-wrap;
+      margin: 0;
+      background-color: #000000;
+      color: #ffffff;
+      font-family: Georgia, serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      text-align: center;
       padding: 20px;
     }
 
-    input {
-      background: black;
+    #contenedor {
+      max-width: 800px;
+      line-height: 1.8;
+    }
+
+    #respuesta {
+      margin-top: 20px;
+      padding: 8px;
+      background: transparent;
       border: none;
-      border-bottom: 1px solid #0f0;
-      color: #0f0;
-      font-size: 14px;
-      font-family: 'Press Start 2P', monospace;
-      width: 120px;
-      margin-top: 10px;
+      border-bottom: 1px solid white;
+      color: white;
+      font-size: 18px;
+      outline: none;
+      font-family: inherit;
+      text-align: center;
+    }
+
+    .frase {
+      margin: 20px 0;
+      opacity: 0;
+      transition: opacity 1s ease-in;
+    }
+
+    .visible {
+      opacity: 1;
     }
 
     a {
-      color: #0f0;
+      color: #ffffff;
       text-decoration: underline;
-      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div id="contenido">
-    <p># 3 meses contigo 💘</p>
-    <p>Para una mejor experiencia, te invito a reproducir esto:</p>
+  <div id="contenedor">
+    <p>3 meses contigo 💘</p>
+    <p>Antes de continuar, pon esta canción:</p>
     <p><a href="https://on.soundcloud.com/UJyTzDHAYnk9UI39je" target="_blank">[ Reproducir canción ]</a></p>
-    <p>Espero no te hayan tirado anuncios 😰 ¿Ya?</p>
-    <input type="text" id="respuesta" placeholder="sí" autofocus />
+    <p>¿Ya la pusiste?</p>
+    <input type="text" id="respuesta" placeholder="sí" autofocus>
   </div>
 
   <script>
-    const input = document.getElementById("respuesta");
-    const contenido = document.getElementById("contenido");
+    const input = document.getElementById('respuesta');
+    const contenedor = document.getElementById('contenedor');
 
     const frases = [
       "Hola, mi amor. ¿Cómo estás?",
       "Espero que bien, porque un día como hoy, hace 3 meses…",
       'Nos hicimos <span style="color:pink;">novias</span>.',
-      'Sí, como <span style="color:saddlebrown;">Kiki</span> y <span style="color:green;">Kiwi</span>.',
+      "Sí, como Kiki y Kiwi.",
       "",
       "Bueno mi amor, por dónde empezar…",
       "Podría hacerlo deseándote feliz mesiversario número 3",
@@ -62,72 +78,40 @@
       "",
       "El 18 de marzo fue la primera vez que tuve una interacción contigo.",
       "Ese mismo día algo me dijo que tenía que hablarte, conocerte.",
-      "Darme una oportunidad para dejar palpitar mi corazón con gusto.",
-      'Sin <span style="color:lightblue; text-decoration:underline; font-style:italic;">contradicciones</span>.',
-      "",
-      "Desde la primera vez que te escuché hablar, pensé…",
-      '-Quién habrá sido la de esa voz tan angelical, diciendo algo tan simple como',
-      '“coño ‘e la madre”-…😝',
-      "Bueno, te escribí y realmente, me caíste bien.",
-      "Pocas veces se conoce gente así de rara, nueva o mejor dicho,",
-      '<span style="color:lightgray; text-decoration:underline; font-style:italic;">interesante</span>.',
-      "Tu voz fue clave en despertar mi interés (y aún lo es).",
-      "Puede llegar a sonar algo loco, pero desde la primera noche, ese 18 de marzo",
-      "<span style='font-style:italic;'>o bueno, aquí ya la madrugada del 19.</span>",
-      "Sentí algo distinto, un presentimiento que claramente no dejé que fuera solo eso.",
-      "Y desde ese día, hasta hoy 27 de octubre…",
+      "Y desde ese día, hasta hoy...",
       "Sigo sintiendo ese presentimiento que se convirtió en algo más.",
-      "<span style='color:red; text-decoration:underline; font-style:italic;'>En amor.</span>",
-      "",
-      "Agradezco que me dieras ese privilegio de poder indagar en quién eras.",
-      "Y por dejarme seguir llenando esa respuesta cada día que pasa.",
-      "Por ser usted la que me enseñe que el amor no era un simple mito.",
-      "O algo retorcido, con mañas.",
-      "Sino algo más allá de la atracción, el deseo o atención.",
-      "Algo único, genuino y valioso.",
-      "",
-      'Y eso justo, es lo que sentía cuando ponía <span style="color:orange; font-style:italic;">“Monet”</span> para dormir.',
-      "Esas noches cuando me di cuenta que mi pasatiempo favorito era hablarte.",
-      "Aunque sea solo responder a los reels que enviabas.",
-      "O mandarte reels de monitos, porque no sabía si mi feed sería de tu agrado 😬.",
-      "",
-      "Mucho antes de conocerte, hice una lista de frases que quería guardar.",
-      "Un día hice hincapié en un tema y decidí agregar una más.",
-      "“118- Las relaciones a distancia funcionan solo cuando las personas quieren que funcione.\"",
-      "Nunca me imaginé que años después…",
-      "Estaría siendo la persona más feliz…",
-      "Queriendo que esto funcione.",
-      "Me encantas Valentina, y ni todos los kilómetros que nos separan",
-      "miden lo mucho que te amo.",
-      "Te amo de la manera más pura, honesta y real.",
-      "Y eso nunca va a cambiar.",
+      "<span style='color:#f88;'>En amor.</span>",
       "",
       "Felices 3 meses, mi niña bonita.",
-      'Gracias por siempre traer la felicidad que <span style="color:mediumorchid; font-style:italic;">Mini Ashtrid</span> una vez tuvo 💜.',
+      'Gracias por traer la felicidad que <span style="color:mediumorchid;">Mini Ashtrid</span> una vez tuvo 💜.',
       "",
-      '<span style="font-style:italic; font-weight:bold;">331-“La distancia es irrelevante cuando el amor es inigualable.”</span>'
+      '<i><b>“La distancia es irrelevante cuando el amor es inigualable.”</b></i>'
     ];
 
     let index = 0;
 
-    function mostrarFrases() {
+    function mostrarFrase() {
       if (index < frases.length) {
-        const p = document.createElement("p");
+        const p = document.createElement('p');
+        p.className = 'frase';
         p.innerHTML = frases[index];
-        contenido.appendChild(p);
+        contenedor.appendChild(p);
+        setTimeout(() => {
+          p.classList.add('visible');
+        }, 100);
         index++;
-        setTimeout(mostrarFrases, 2500);
+        setTimeout(mostrarFrase, 2800);
       }
     }
 
-    input.addEventListener("keydown", function (e) {
-      if (e.key === "Enter") {
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
         const val = input.value.toLowerCase().trim();
-        if (val === "sí" || val === "si") {
-          input.style.display = "none";
-          mostrarFrases();
+        if (val === 'sí' || val === 'si') {
+          input.remove();
+          mostrarFrase();
         } else {
-          input.value = ""; // ignora cualquier otra entrada
+          input.value = '';
         }
       }
     });
