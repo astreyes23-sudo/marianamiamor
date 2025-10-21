@@ -1,93 +1,51 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>3 meses contigo 💘</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      background-color: #000;
-      color: #fff;
-      font-family: 'Press Start 2P', monospace;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      padding: 20px;
-      text-align: center;
-      overflow: hidden;
-    }
-    #contenedor {
-      max-width: 700px;
-      font-size: 28px;
-      line-height: 1.5;
-    }
-    #respuesta {
-      margin-top: 20px;
-      padding: 10px 5px;
-      font-size: 24px;
-      background: transparent;
-      border: none;
-      border-bottom: 2px solid white;
-      color: white;
-      font-family: inherit;
-      outline: none;
-      text-align: center;
-    }
-    a {
-      color: white;
-      text-decoration: underline;
-    }
-    .cursor {
-      display: inline-block;
-      width: 10px;
-      background-color: white;
-      margin-left: 2px;
-      animation: blink 1s steps(1) infinite;
-      vertical-align: bottom;
-    }
-    @keyframes blink {
-      50% { background-color: transparent; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<title>Prueba animación y colores</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+<style>
+  body {
+    background: black;
+    color: white;
+    font-family: 'Press Start 2P', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    text-align: center;
+  }
+  #contenedor {
+    max-width: 600px;
+    font-size: 28px;
+  }
+  .cursor {
+    display: inline-block;
+    width: 10px;
+    background-color: white;
+    margin-left: 2px;
+    animation: blink 1s steps(1) infinite;
+    vertical-align: bottom;
+  }
+  @keyframes blink {
+    50% { background-color: transparent; }
+  }
+</style>
 </head>
 <body>
   <div id="contenedor"></div>
   <script>
     const frases = [
-      "3 meses contigo 💘",
-      "Antes de continuar, pon esta canción:",
-      '<a href="https://on.soundcloud.com/UJyTzDHAYnk9UI39je" target="_blank">[ Reproducir canción ]</a>',
-      "¿Ya la pusiste?",
-    ];
-
-    const frasesFinales = [
-      "Hola, mi amor. ¿Cómo estás?",
-      "Espero que bien, porque un día como hoy, hace 3 meses…",
-      'Nos hicimos <span style="color:pink;">novias</span>.',
-      "Sí, como Kiki y Kiwi.",
-      "",
-      "Bueno mi amor, por dónde empezar…",
-      "Podría hacerlo deseándote feliz mesiversario número 3",
-      "O expresando lo mucho que te amo.",
-      "Pero creo que lo haré con las mismas frases que escribí en ese libro basado en ti.",
-      "",
-      "El 18 de marzo fue la primera vez que tuve una interacción contigo.",
-      "Ese mismo día algo me dijo que tenía que hablarte, conocerte.",
-      "Y desde ese día, hasta hoy...",
-      "Sigo sintiendo ese presentimiento que se convirtió en algo más.",
-      "<span style='color:#f88;'>En amor.</span>",
-      "",
-      "Felices 3 meses, mi niña bonita.",
-      'Gracias por traer la felicidad que <span style="color:mediumorchid;">Mini Ashtrid</span> una vez tuvo 💜.',
-      "",
-      '<i><b>“La distancia es irrelevante cuando el amor es inigualable.”</b></i>'
+      "Hola, mi amor.",
+      "Nos hicimos novias.",
+      '<span style="color: pink;">Esto está en rosa</span>',
+      "Y esto en blanco normal."
     ];
 
     const contenedor = document.getElementById("contenedor");
 
-    function escribirTexto(texto, elemento, callback) {
+    function escribirHTML(texto, elemento, callback) {
       let i = 0;
       elemento.innerHTML = "";
       const cursor = document.createElement("span");
@@ -96,55 +54,28 @@
 
       function escribir() {
         if (i < texto.length) {
-          cursor.insertAdjacentHTML("beforebegin", texto.charAt(i));
-          i++;
-          setTimeout(escribir, 50);
-        } else {
-          cursor.remove();
+          // Aquí vamos a agregar un truquito para ir mostrando el HTML de forma sencilla
+          // Pero la mejor manera es crear un contenedor temporal y parsear bien, cosa que es más avanzada.
+          // Para este ejemplo, solo escribiremos todo de golpe:
+          elemento.innerHTML = texto + '<span class="cursor"></span>';
           if (callback) callback();
         }
       }
       escribir();
     }
 
-    function mostrarFrases(frases, index = 0, callback) {
-      if (index >= frases.length) {
-        if (callback) callback();
-        return;
-      }
+    function mostrarFrases(index = 0) {
+      if (index >= frases.length) return;
       const p = document.createElement("p");
       contenedor.appendChild(p);
-      escribirTexto(frases[index], p, () => {
+      escribirHTML(frases[index], p, () => {
         setTimeout(() => {
-          mostrarFrases(frases, index + 1, callback);
-        }, 1000);
+          mostrarFrases(index + 1);
+        }, 2000);
       });
     }
 
-    function iniciar() {
-      mostrarFrases(frases, 0, () => {
-        const input = document.createElement("input");
-        input.type = "text";
-        input.id = "respuesta";
-        input.placeholder = "sí";
-        contenedor.appendChild(input);
-        input.focus();
-
-        input.addEventListener("keydown", (e) => {
-          if (e.key === "Enter") {
-            const val = input.value.toLowerCase().trim();
-            if (val === "sí" || val === "si") {
-              input.remove();
-              mostrarFrases(frasesFinales);
-            } else {
-              input.value = "";
-            }
-          }
-        });
-      });
-    }
-
-    iniciar();
+    mostrarFrases();
   </script>
 </body>
 </html>
