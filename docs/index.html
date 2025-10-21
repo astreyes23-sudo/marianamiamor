@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8" />
-<title>Prueba animación y colores</title>
+<title>3 meses con el amor de mi vida 💘</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 <style>
   body {
@@ -15,10 +15,16 @@
     height: 100vh;
     padding: 20px;
     text-align: center;
+    margin: 0;
   }
-  #contenedor {
-    max-width: 600px;
-    font-size: 28px;
+  #contenido {
+    max-width: 700px;
+    font-size: 22px;
+    line-height: 1.4;
+  }
+  a {
+    color: #0f0;
+    text-decoration: underline;
   }
   .cursor {
     display: inline-block;
@@ -34,48 +40,25 @@
 </style>
 </head>
 <body>
-  <div id="contenedor"></div>
+  <div id="contenido">
+    <p># 3 meses contigo 💘</p>
+    <p>Para una mejor experiencia, te invito a reproducir esto:</p>
+    <p><a href="https://on.soundcloud.com/UJyTzDHAYnk9UI39je" target="_blank" rel="noopener noreferrer">[ Reproducir canción ]</a></p>
+  </div>
+
   <script>
     const frases = [
-      "Hola, mi amor.",
-      "Nos hicimos novias.",
-      '<span style="color: pink;">Esto está en rosa</span>',
-      "Y esto en blanco normal."
-    ];
-
-    const contenedor = document.getElementById("contenedor");
-
-    function escribirHTML(texto, elemento, callback) {
-      let i = 0;
-      elemento.innerHTML = "";
-      const cursor = document.createElement("span");
-      cursor.className = "cursor";
-      elemento.appendChild(cursor);
-
-      function escribir() {
-        if (i < texto.length) {
-          // Aquí vamos a agregar un truquito para ir mostrando el HTML de forma sencilla
-          // Pero la mejor manera es crear un contenedor temporal y parsear bien, cosa que es más avanzada.
-          // Para este ejemplo, solo escribiremos todo de golpe:
-          elemento.innerHTML = texto + '<span class="cursor"></span>';
-          if (callback) callback();
-        }
-      }
-      escribir();
-    }
-
-    function mostrarFrases(index = 0) {
-      if (index >= frases.length) return;
-      const p = document.createElement("p");
-      contenedor.appendChild(p);
-      escribirHTML(frases[index], p, () => {
-        setTimeout(() => {
-          mostrarFrases(index + 1);
-        }, 2000);
-      });
-    }
-
-    mostrarFrases();
-  </script>
-</body>
-</html>
+      "Hola, mi amor. ¿Cómo estás?",
+      "Espero que bien, porque un día como hoy, hace 3 meses…",
+      'Nos hicimos <span style="color:pink;">novias</span>.',
+      'Sí, como <span style="color:saddlebrown;">Kiki</span> y <span style="color:green;">Kiwi</span>.',
+      "",
+      "Bueno mi amor, por dónde empezar…",
+      "Podría hacerlo deseándote feliz mesiversario número 3",
+      "O expresando lo mucho que te amo.",
+      "Pero creo que lo haré con las mismas frases que escribí en ese libro basado en ti.",
+      "",
+      "El 18 de marzo fue la primera vez que tuve una interacción contigo.",
+      "Ese mismo día algo me dijo que tenía que hablarte, conocerte.",
+      "Darme una oportunidad para dejar palpitar mi corazón con gusto.",
+      'Sin <span style="color:lightblue; tex
