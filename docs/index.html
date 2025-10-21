@@ -13,43 +13,45 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       margin: 0;
       text-align: center;
       padding: 20px;
     }
     #contenido {
-      max-width: 700px;
-      font-size: 22px;
-      line-height: 1.4;
+      max-width: 800px;
+      font-size: 16px;
+      line-height: 1.8;
     }
     a {
-      color: #0f0;
+      color: #7ec8e3; /* azul clarito */
       text-decoration: underline;
       cursor: pointer;
     }
-    .cursor {
-      display: inline-block;
-      width: 10px;
-      background-color: white;
-      margin-left: 2px;
-      animation: blink 1s steps(1) infinite;
-      vertical-align: bottom;
-    }
-    @keyframes blink {
-      50% { background-color: transparent; }
+    input {
+      background: black;
+      border: none;
+      border-bottom: 1px solid white;
+      color: white;
+      font-size: 14px;
+      font-family: 'Press Start 2P', monospace;
+      width: 120px;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-  <div id="contenido">
-    <p># 3 meses contigo 💘</p>
-    <p>Para una mejor experiencia, te invito a reproducir esto:</p>
-    <p><a href="https://on.soundcloud.com/UJyTzDHAYnk9UI39je" target="_blank" rel="noopener noreferrer">[ Reproducir canción ]</a></p>
-  </div>
+  <div id="contenido"></div>
 
   <script>
     const contenido = document.getElementById("contenido");
+
+    const introFrases = [
+      "# 3 meses contigo 💘",
+      "Para una mejor experiencia, te invito a reproducir esto:",
+      '<a href="https://on.soundcloud.com/UJyTzDHAYnk9UI39je" target="_blank" rel="noopener noreferrer">[ Reproducir canción ]</a>',
+      "¿Ya?"
+    ];
 
     const frases = [
       "Hola, mi amor. ¿Cómo estás?",
@@ -110,35 +112,61 @@
       '<span style="font-style:italic; font-weight:bold;">331-“La distancia es irrelevante cuando el amor es inigualable.”</span>'
     ];
 
-    function typeWriter(text, element, delay = 40, callback) {
+    function typeWriter(text, callback) {
+      const p = document.createElement("p");
+      contenido.appendChild(p);
+
       let i = 0;
-      function write() {
+      function escribir() {
         if (i <= text.length) {
-          element.innerHTML = text.substring(0, i);
+          p.innerHTML = text.substring(0, i);
           i++;
-          setTimeout(write, delay);
+          setTimeout(escribir, 30);
         } else {
           if (callback) callback();
         }
       }
-      write();
+      escribir();
     }
 
-    async function mostrarFrases() {
-      for (const frase of frases) {
-        const p = document.createElement("p");
-        contenido.appendChild(p);
-        await new Promise((res) => {
-          typeWriter(frase, p, 40, res);
+    function mostrarIntro(index = 0) {
+      if (index < introFrases.length) {
+        typeWriter(introFrases[index], () => {
+          // Si ya escribió "¿Ya?", mostrar input
+          if (index === introFrases.length - 1) {
+            const input = document.createElement("input");
+            input.placeholder = "sí";
+            contenido.appendChild(input);
+            input.focus();
+
+            input.addEventListener("keydown", (e) => {
+              if (e.key === "Enter") {
+                const val = input.value.toLowerCase().trim();
+                if (val === "sí" || val === "si") {
+                  input.remove();
+                  mostrarFrases();
+                } else {
+                  input.value = "";
+                }
+              }
+            });
+          } else {
+            mostrarIntro(index + 1);
+          }
         });
-        await new Promise((res) => setTimeout(res, 1000));
       }
     }
 
-    setTimeout(() => {
-      contenido.querySelectorAll("p:not(:first-child):not(:nth-child(2)):not(:nth-child(3))").forEach(p => p.remove());
-      mostrarFrases();
-    }, 2000);
+    function mostrarFrases(index = 0) {
+      if (index < frases.length) {
+        typeWriter(frases[index], () => {
+          setTimeout(() => mostrarFrases(index + 1), 500);
+        });
+      }
+    }
+
+    // Iniciar mostrando intro
+    mostrarIntro();
   </script>
 </body>
 </html>
