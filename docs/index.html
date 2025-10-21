@@ -1,43 +1,45 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<title>3 meses con el amor de mi vida 💘</title>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
-<style>
-  body {
-    background: black;
-    color: white;
-    font-family: 'Press Start 2P', monospace;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding: 20px;
-    text-align: center;
-    margin: 0;
-  }
-  #contenido {
-    max-width: 700px;
-    font-size: 22px;
-    line-height: 1.4;
-  }
-  a {
-    color: #0f0;
-    text-decoration: underline;
-  }
-  .cursor {
-    display: inline-block;
-    width: 10px;
-    background-color: white;
-    margin-left: 2px;
-    animation: blink 1s steps(1) infinite;
-    vertical-align: bottom;
-  }
-  @keyframes blink {
-    50% { background-color: transparent; }
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>3 meses con el amor de mi vida 💘</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background: black;
+      color: white;
+      font-family: 'Press Start 2P', monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+      padding: 20px;
+    }
+    #contenido {
+      max-width: 700px;
+      font-size: 22px;
+      line-height: 1.4;
+    }
+    a {
+      color: #0f0;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      background-color: white;
+      margin-left: 2px;
+      animation: blink 1s steps(1) infinite;
+      vertical-align: bottom;
+    }
+    @keyframes blink {
+      50% { background-color: transparent; }
+    }
+  </style>
 </head>
 <body>
   <div id="contenido">
@@ -47,6 +49,8 @@
   </div>
 
   <script>
+    const contenido = document.getElementById("contenido");
+
     const frases = [
       "Hola, mi amor. ¿Cómo estás?",
       "Espero que bien, porque un día como hoy, hace 3 meses…",
@@ -61,4 +65,80 @@
       "El 18 de marzo fue la primera vez que tuve una interacción contigo.",
       "Ese mismo día algo me dijo que tenía que hablarte, conocerte.",
       "Darme una oportunidad para dejar palpitar mi corazón con gusto.",
-      'Sin <span style="color:lightblue; tex
+      'Sin <span style="color:lightblue; text-decoration:underline; font-style:italic;">contradicciones</span>.',
+      "",
+      "Desde la primera vez que te escuché hablar, pensé…",
+      '-Quién habrá sido la de esa voz tan angelical, diciendo algo tan simple como',
+      '“coño ‘e la madre”-…😝',
+      "Bueno, te escribí y realmente, me caíste bien.",
+      "Pocas veces se conoce gente así de rara, nueva o mejor dicho,",
+      '<span style="color:lightgray; text-decoration:underline; font-style:italic;">interesante</span>.',
+      "Tu voz fue clave en despertar mi interés (y aún lo es).",
+      "Puede llegar a sonar algo loco, pero desde la primera noche, ese 18 de marzo",
+      "<span style='font-style:italic;'>o bueno, aquí ya la madrugada del 19.</span>",
+      "Sentí algo distinto, un presentimiento que claramente no dejé que fuera solo eso.",
+      "Y desde ese día, hasta hoy 27 de octubre…",
+      "Sigo sintiendo ese presentimiento que se convirtió en algo más.",
+      "<span style='color:red; text-decoration:underline; font-style:italic;'>En amor.</span>",
+      "",
+      "Agradezco que me dieras ese privilegio de poder indagar en quién eras.",
+      "Y por dejarme seguir llenando esa respuesta cada día que pasa.",
+      "Por ser usted la que me enseñe que el amor no era un simple mito.",
+      "O algo retorcido, con mañas.",
+      "Sino algo más allá de la atracción, el deseo o atención.",
+      "Algo único, genuino y valioso.",
+      "",
+      'Y eso justo, es lo que sentía cuando ponía <span style="color:orange; font-style:italic;">“Monet”</span> para dormir.',
+      "Esas noches cuando me di cuenta que mi pasatiempo favorito era hablarte.",
+      "Aunque sea solo responder a los reels que enviabas.",
+      "O mandarte reels de monitos, porque no sabía si mi feed sería de tu agrado 😬.",
+      "",
+      "Mucho antes de conocerte, hice una lista de frases que quería guardar.",
+      "Un día hice hincapié en un tema y decidí agregar una más.",
+      "“118- Las relaciones a distancia funcionan solo cuando las personas quieren que funcione.\"",
+      "Nunca me imaginé que años después…",
+      "Estaría siendo la persona más feliz…",
+      "Queriendo que esto funcione.",
+      "Me encantas Valentina, y ni todos los kilómetros que nos separan",
+      "miden lo mucho que te amo.",
+      "Te amo de la manera más pura, honesta y real.",
+      "Y eso nunca va a cambiar.",
+      "",
+      "Felices 3 meses, mi niña bonita.",
+      'Gracias por siempre traer la felicidad que <span style="color:mediumorchid; font-style:italic;">Mini Ashtrid</span> una vez tuvo 💜.',
+      "",
+      '<span style="font-style:italic; font-weight:bold;">331-“La distancia es irrelevante cuando el amor es inigualable.”</span>'
+    ];
+
+    function typeWriter(text, element, delay = 40, callback) {
+      let i = 0;
+      function write() {
+        if (i <= text.length) {
+          element.innerHTML = text.substring(0, i);
+          i++;
+          setTimeout(write, delay);
+        } else {
+          if (callback) callback();
+        }
+      }
+      write();
+    }
+
+    async function mostrarFrases() {
+      for (const frase of frases) {
+        const p = document.createElement("p");
+        contenido.appendChild(p);
+        await new Promise((res) => {
+          typeWriter(frase, p, 40, res);
+        });
+        await new Promise((res) => setTimeout(res, 1000));
+      }
+    }
+
+    setTimeout(() => {
+      contenido.querySelectorAll("p:not(:first-child):not(:nth-child(2)):not(:nth-child(3))").forEach(p => p.remove());
+      mostrarFrases();
+    }, 2000);
+  </script>
+</body>
+</html>
