@@ -1,71 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>3 meses contigo 💗</title>
+  <meta charset="UTF-8" />
+  <title>3 meses contigo 💘</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      background-color: #000000;
-      color: #ffffff;
-      font-family: Georgia, serif;
+      background-color: #000;
+      color: #fff;
+      font-family: 'Press Start 2P', monospace;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      flex-direction: column;
-      text-align: center;
       padding: 20px;
+      text-align: center;
+      overflow: hidden;
     }
-
     #contenedor {
-      max-width: 800px;
-      line-height: 1.8;
+      max-width: 700px;
+      font-size: 28px;
+      line-height: 1.5;
     }
-
     #respuesta {
       margin-top: 20px;
-      padding: 8px;
+      padding: 10px 5px;
+      font-size: 24px;
       background: transparent;
       border: none;
-      border-bottom: 1px solid white;
+      border-bottom: 2px solid white;
       color: white;
-      font-size: 18px;
-      outline: none;
       font-family: inherit;
+      outline: none;
       text-align: center;
     }
-
-    .frase {
-      margin: 20px 0;
-      opacity: 0;
-      transition: opacity 1s ease-in;
-    }
-
-    .visible {
-      opacity: 1;
-    }
-
     a {
-      color: #ffffff;
+      color: white;
       text-decoration: underline;
+    }
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      background-color: white;
+      margin-left: 2px;
+      animation: blink 1s steps(1) infinite;
+      vertical-align: bottom;
+    }
+    @keyframes blink {
+      50% { background-color: transparent; }
     }
   </style>
 </head>
 <body>
-  <div id="contenedor">
-    <p>3 meses contigo 💘</p>
-    <p>Antes de continuar, pon esta canción:</p>
-    <p><a href="https://on.soundcloud.com/UJyTzDHAYnk9UI39je" target="_blank">[ Reproducir canción ]</a></p>
-    <p>¿Ya la pusiste?</p>
-    <input type="text" id="respuesta" placeholder="sí" autofocus>
-  </div>
-
+  <div id="contenedor"></div>
   <script>
-    const input = document.getElementById('respuesta');
-    const contenedor = document.getElementById('contenedor');
-
     const frases = [
+      "3 meses contigo 💘",
+      "Antes de continuar, pon esta canción:",
+      '<a href="https://on.soundcloud.com/UJyTzDHAYnk9UI39je" target="_blank">[ Reproducir canción ]</a>',
+      "¿Ya la pusiste?",
+    ];
+
+    const frasesFinales = [
       "Hola, mi amor. ¿Cómo estás?",
       "Espero que bien, porque un día como hoy, hace 3 meses…",
       'Nos hicimos <span style="color:pink;">novias</span>.',
@@ -88,33 +85,66 @@
       '<i><b>“La distancia es irrelevante cuando el amor es inigualable.”</b></i>'
     ];
 
-    let index = 0;
+    const contenedor = document.getElementById("contenedor");
 
-    function mostrarFrase() {
-      if (index < frases.length) {
-        const p = document.createElement('p');
-        p.className = 'frase';
-        p.innerHTML = frases[index];
-        contenedor.appendChild(p);
-        setTimeout(() => {
-          p.classList.add('visible');
-        }, 100);
-        index++;
-        setTimeout(mostrarFrase, 2800);
-      }
-    }
+    function escribirTexto(texto, elemento, callback) {
+      let i = 0;
+      elemento.innerHTML = "";
+      const cursor = document.createElement("span");
+      cursor.className = "cursor";
+      elemento.appendChild(cursor);
 
-    input.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter') {
-        const val = input.value.toLowerCase().trim();
-        if (val === 'sí' || val === 'si') {
-          input.remove();
-          mostrarFrase();
+      function escribir() {
+        if (i < texto.length) {
+          cursor.insertAdjacentHTML("beforebegin", texto.charAt(i));
+          i++;
+          setTimeout(escribir, 50);
         } else {
-          input.value = '';
+          cursor.remove();
+          if (callback) callback();
         }
       }
-    });
+      escribir();
+    }
+
+    function mostrarFrases(frases, index = 0, callback) {
+      if (index >= frases.length) {
+        if (callback) callback();
+        return;
+      }
+      const p = document.createElement("p");
+      contenedor.appendChild(p);
+      escribirTexto(frases[index], p, () => {
+        setTimeout(() => {
+          mostrarFrases(frases, index + 1, callback);
+        }, 1000);
+      });
+    }
+
+    function iniciar() {
+      mostrarFrases(frases, 0, () => {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.id = "respuesta";
+        input.placeholder = "sí";
+        contenedor.appendChild(input);
+        input.focus();
+
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            const val = input.value.toLowerCase().trim();
+            if (val === "sí" || val === "si") {
+              input.remove();
+              mostrarFrases(frasesFinales);
+            } else {
+              input.value = "";
+            }
+          }
+        });
+      });
+    }
+
+    iniciar();
   </script>
 </body>
 </html>
